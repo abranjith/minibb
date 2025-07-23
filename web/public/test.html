@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Direct Topic Test</title>
+</head>
+<body>
+    <h1>Direct Topic Test</h1>
+    <button onclick="testTopicAPI()">Test Topic API</button>
+    <button onclick="testPostsAPI()">Test Posts API</button>
+    <div id="output"></div>
+    
+    <script>
+        async function testTopicAPI() {
+            try {
+                const response = await fetch('/api/topic/1');
+                const data = await response.json();
+                document.getElementById('output').innerHTML = '<pre>' + JSON.stringify(data, null, 2) + '</pre>';
+                console.log('Topic API response:', data);
+            } catch (error) {
+                console.error('Topic API error:', error);
+                document.getElementById('output').innerHTML = 'Error: ' + error.message;
+            }
+        }
+        
+        async function testPostsAPI() {
+            try {
+                const response = await fetch('/api/posts/topic/1');
+                const data = await response.json();
+                document.getElementById('output').innerHTML = '<pre>' + JSON.stringify(data, null, 2) + '</pre>';
+                console.log('Posts API response:', data);
+            } catch (error) {
+                console.error('Posts API error:', error);
+                document.getElementById('output').innerHTML = 'Error: ' + error.message;
+            }
+        }
+    </script>
+</body>
+</html>
